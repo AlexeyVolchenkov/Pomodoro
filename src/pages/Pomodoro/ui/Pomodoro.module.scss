@@ -1,0 +1,19 @@
+@use "@styles/variables";
+
+.container {
+  margin: 0 auto;
+  max-width: var(--container-width);
+}
+
+.main {
+  padding-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 36px;
+}
+
+.mainBorder {
+  padding: 24px;
+  border: var(--border);
+  border-radius: var(--border-radius-l);
+}

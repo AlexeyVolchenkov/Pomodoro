@@ -1,0 +1,17 @@
+@use '@styles/variables';
+
+.button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-zinc-100);
+  border-radius: var(--border-radius-xxs);
+  cursor: pointer;
+  transition-duration: var(--transition-duration);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

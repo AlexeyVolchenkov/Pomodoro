@@ -1,0 +1,28 @@
+@use "fonts";
+
+:root {
+  --font-family-base: "Inter", sans-serif;
+
+  --color-zinc-100: #F4F4F5;
+  --color-zinc-200: #E4E4E7;
+  --color-zinc-400: #A1A1AA;
+  --color-zinc-500: #71717A;
+  --color-zinc-600: #52525B;
+  --color-zinc-800: #27272A;
+  --color-lime-500: #84CC16;
+  --color-cyan-500: #06B6D4;
+
+  --border-radius-xxs: 4px;
+  --border-radius-xs: 6px;
+  --border-radius-s: 8px;
+  --border-radius-m: 10px;
+  --border-radius-l: 12px;
+
+  --container-width: 1100px;
+
+  --transition-duration: 0.2s;
+  --transition-duration-longer: 0.4s;
+
+  --border: 1px solid var(--color-zinc-200);
+  --border-tile: 1px solid white;
+}

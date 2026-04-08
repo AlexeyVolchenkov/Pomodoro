@@ -1,0 +1,11 @@
+@use "@styles/variables";
+
+.tile {
+  padding-block: 4px;
+  padding-inline: 8px;
+  color: var(--tile-color);
+  background-color: color-mix(in srgb, var(--tile-color), transparent 90%);
+  border: var(--border-tile);
+  border-color: var(--tile-color);
+  border-radius: var(--border-radius-xxs);
+}

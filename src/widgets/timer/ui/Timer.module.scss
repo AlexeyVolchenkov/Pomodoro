@@ -1,0 +1,28 @@
+@use "@styles/variables";
+
+.header {
+  padding-bottom: 24px;
+  border-bottom: var(--border);
+}
+
+.main {
+  padding-top: 24px;
+  display: grid;
+  row-gap: 24px;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.infoMode {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

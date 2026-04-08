@@ -1,0 +1,28 @@
+@use '@styles/variables';
+
+.header {
+  padding-top: 54px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.blockText {
+
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--color-zinc-800);
+}
+
+.subtitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+}
