@@ -1,10 +1,6 @@
 import styles from './Tile.module.scss'
 import * as React from "react";
-
-const colorMap = {
-  lime: 'var(--color-lime-500)',
-  cyan: 'var(--color-cyan-500)'
-}
+import {colorMap} from "@shared/utils/mapping.ts";
 
 interface TileProps {
   children: React.ReactNode;

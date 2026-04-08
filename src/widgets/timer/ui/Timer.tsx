@@ -1,32 +1,37 @@
 import Tile from "@shared/Tile";
 import styles from './Timer.module.scss'
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import {useTimerStore} from "@shared/stores/timerStore.ts";
+
+const TOTAL_TIME = 1500;
+const RADIUS = 120;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 const Timer = () => {
-  const [timer, setTimer] = useState(299);
-  const [isActive, setIsActive] = useState(false)
-
+  const timer = useTimerStore(state => state.timer)
+  const isActive = useTimerStore(state => state.isActive)
+  const formatedTime = useTimerStore(state => state.formatedTime)
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined;
 
     if (isActive && timer > 0) {
       interval = setInterval(() => {
-        setTimer((prevState) => {
-          if (prevState <= 1) {
-            setIsActive(false);
-            return 0
+        useTimerStore.setState((state) => {
+          if (state.timer <= 1) {
+            return { timer: 0, isActive: false }
           } else {
-            return prevState - 1
+            return { timer: state.timer - 1 }
           }
         })
       }, 1000)
     }
 
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [isActive, timer]);
-
-  const toggleTimer = () => setIsActive(!isActive);
+  const offset = CIRCUMFERENCE - (timer / TOTAL_TIME) * CIRCUMFERENCE;
 
   return (
     <div >
@@ -44,10 +49,19 @@ const Timer = () => {
           <Tile color='cyan'>Пауза</Tile>
         </div>
         <div className={styles.timer}>
-          {`${Math.floor(timer / 60)}`.padStart(2, '0')}:{`${Math.floor(timer % 60)}`.padStart(2, '0')}
-          <button
-            onClick={toggleTimer}
-          >timer</button>
+          <svg className={styles.svgRing} viewBox="0 0 300 300">
+            <circle
+              className={styles.circleBg}
+              cx="150" cy="150" r={RADIUS}
+            />
+            <circle
+              className={styles.circleProgress}
+              cx="150" cy="150" r={RADIUS}
+              strokeDasharray={CIRCUMFERENCE}
+              strokeDashoffset={offset}
+            />
+          </svg>
+          {formatedTime()}
         </div>
       </div>
     </div>

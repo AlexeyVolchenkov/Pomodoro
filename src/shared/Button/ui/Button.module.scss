@@ -1,6 +1,6 @@
 @use '@styles/variables';
 
-.button {
+.iconButton {
   width: 44px;
   height: 44px;
   display: flex;
@@ -14,4 +14,13 @@
   &:hover {
     transform: scale(1.1);
   }
+}
+
+.contentButton {
+  padding-block: 8px;
+  padding-inline: 12px;
+  color: var(--color-white);
+  background-color: var(--color-button);
+  border-radius: var(--border-radius-xxs);
+  cursor: pointer;
 }

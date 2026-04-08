@@ -5,6 +5,10 @@ import githubLogo from '@/assets/icons/header/github.svg'
 import translateLogo from '@/assets/icons/header/translate.svg'
 
 const Header = () => {
+  const handleClick = () => {
+    console.log("click")
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.blockText}>
@@ -12,9 +16,9 @@ const Header = () => {
         <span className={styles.subtitle}>Управляйте своим временем волшебным образом!</span>
       </div>
       <div className={styles.buttons}>
-        <Button icon={themeLogo}></Button>
-        <Button icon={githubLogo}></Button>
-        <Button icon={translateLogo}></Button>
+        <Button icon={themeLogo} color={'zinc-100'} onClick={handleClick}></Button>
+        <Button icon={githubLogo} color={'zinc-100'} onClick={handleClick}></Button>
+        <Button icon={translateLogo} color={'zinc-100'} onClick={handleClick}></Button>
       </div>
     </header>
   )
