@@ -1,20 +1,5 @@
 @use "@styles/variables";
 
-.header {
-  padding-bottom: 24px;
-  border-bottom: var(--border);
-}
-
-.main {
-  padding-top: 24px;
-  display: grid;
-  row-gap: 24px;
-}
-
-.title {
-  font-weight: 700;
-}
-
 .infoMode {
   display: flex;
   justify-content: space-between;
@@ -30,7 +15,7 @@
   font-size: 64px;
 }
 
-.svgRing {
+.circle {
   position: absolute;
   top: 0;
   left: 0;
@@ -39,7 +24,7 @@
   height: 100%;
 }
 
-.circleBg {
+.circleBackground {
   fill: none;
   stroke: var(--color-zinc-100);
   stroke-width: 15;

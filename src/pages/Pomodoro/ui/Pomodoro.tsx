@@ -1,7 +1,6 @@
-import Timer from "@widgets/timer";
-import Tasks from "@widgets/tasks";
 import Header from "@widgets/header";
-import styles from './Pomodoro.module.scss'
+import styles from './Pomodoro.module.scss';
+import Main from "@widgets/main";
 
 const Pomodoro = () => {
   return (
@@ -9,12 +8,7 @@ const Pomodoro = () => {
       <div className={styles.container}>
         <Header />
         <div className={styles.main}>
-          <div className={styles.mainBorder}>
-            <Timer />
-          </div>
-          <div className={styles.mainBorder}>
-            <Tasks />
-          </div>
+          <Main />
         </div>
       </div>
     </>

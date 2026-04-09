@@ -1,0 +1,24 @@
+.tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tasksList {
+  display: grid;
+  row-gap: 10px;
+}
+
+.addTask {
+  display: flex;
+}
+
+.input {
+  border: 1px solid red;
+  flex: 1;
+}
+
+.footer {
+  display: grid;
+  row-gap: 10px;
+}

@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
 interface TimerStore {
+  totalTime: number;
   timer: number;
   isActive: boolean;
 
@@ -9,7 +10,8 @@ interface TimerStore {
 }
 
 export const useTimerStore = create<TimerStore>((set, get) => ({
-  timer: 1500,
+  totalTime: 1500,
+  timer: 1000,
   isActive: false,
 
   setIsActive: (value) => set({ isActive: value }),
