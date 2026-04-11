@@ -1,8 +1,9 @@
+import {useState} from "react";
 import {useTimerStore} from "@shared/stores/timerStore.ts";
 import {useTasksStore} from "@shared/stores/tasksStore.ts";
+import clsx from 'clsx'
 import Button from "@shared/Button";
 import styles from './Tasks.module.scss'
-import {useState} from "react";
 
 const Tasks = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -11,6 +12,7 @@ const Tasks = () => {
   const setIsActive = useTimerStore((state) => state.setIsActive);
   const tasks = useTasksStore((state) => state.tasks);
   const addTask = useTasksStore((state) => state.addTask);
+  const toggleTask = useTasksStore((state) => state.toggleTask);
 
   const toggleTimer = () => setIsActive(!isActive);
 
@@ -23,8 +25,24 @@ const Tasks = () => {
     <div className={styles.tasks}>
       <div>
         <div className={styles.tasksList}>
-          {tasks.map((task) => (
-            <span key={task}>{task}</span>
+          {tasks.map(({ title, isFinished }) => (
+            <div
+              key={title}
+              className={styles.taskWrapper}
+            >
+              <input
+                type="checkbox"
+                id={`${title}-checkbox`}
+                checked={isFinished}
+                onChange={() => toggleTask(title)}
+              />
+            <label
+              htmlFor={`${title}-checkbox`}
+              className={clsx(styles.task, {
+                [styles.finishedTask]: isFinished,
+              })}
+            >{title}</label>
+            </div>
           ))}
         </div>
       </div>
@@ -36,11 +54,16 @@ const Tasks = () => {
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}
           />
-          <button onClick={handleAddTask}>Добавить</button>
+          <Button
+            color={'cyan'}
+            onClick={handleAddTask}
+          >
+            Добавить
+          </Button>
         </div>
         <Button
-          onClick={toggleTimer}
           color={isActive ? 'cyan' : 'lime'}
+          onClick={toggleTimer}
         >
           {isActive ? "Стоп" : "Старт"}
         </Button>

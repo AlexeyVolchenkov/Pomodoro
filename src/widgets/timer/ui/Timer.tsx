@@ -11,6 +11,9 @@ const Timer = () => {
   const timer = useTimerStore(state => state.timer)
   const isActive = useTimerStore(state => state.isActive)
   const formatedTime = useTimerStore(state => state.formatedTime)
+  const currentMode = useTimerStore(state => state.currentMode)
+  const nextMode = useTimerStore(state => state.nextMode)
+  const switchMode = useTimerStore(state => state.switchMode)
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined;
@@ -19,7 +22,8 @@ const Timer = () => {
       interval = setInterval(() => {
         useTimerStore.setState((state) => {
           if (state.timer <= 1) {
-            return { timer: 0, isActive: false }
+            switchMode(nextMode, currentMode);
+            return {}
           } else {
             return { timer: state.timer - 1 }
           }
@@ -37,11 +41,11 @@ const Timer = () => {
     <>
       <div className={styles.infoMode}>
         <h2>Текущий режим</h2>
-        <Tile color='lime'>Фокус</Tile>
+        <Tile color={currentMode === 'Фокус' ? 'lime' : 'cyan'}>{currentMode}</Tile>
       </div>
       <div className={styles.infoMode}>
         <h2>Следующий режим</h2>
-        <Tile color='cyan'>Пауза</Tile>
+        <Tile color={nextMode === 'Перерыв' ? 'cyan' : 'lime'}>{nextMode}</Tile>
       </div>
       <div className={styles.timer}>
         <svg className={styles.circle} viewBox="0 0 300 300">
