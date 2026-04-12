@@ -23,4 +23,9 @@
   background-color: var(--color-button);
   border-radius: var(--border-radius-xxs);
   cursor: pointer;
+  transition-duration: var(--transition-duration);
+
+  &:hover {
+    transform: scale(1.03);
+  }
 }

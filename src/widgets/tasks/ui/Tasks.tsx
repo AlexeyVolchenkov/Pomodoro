@@ -13,54 +13,94 @@ const Tasks = () => {
   const tasks = useTasksStore((state) => state.tasks);
   const addTask = useTasksStore((state) => state.addTask);
   const toggleTask = useTasksStore((state) => state.toggleTask);
+  const deleteTask = useTasksStore((state) => state.deleteTask);
 
   const toggleTimer = () => setIsActive(!isActive);
 
   const handleAddTask = () => {
-    addTask(inputValue);
-    setInputValue("");
+    if (inputValue) {
+      addTask(inputValue);
+      setInputValue("");
+    }
   }
 
   return (
     <div className={styles.tasks}>
-      <div>
-        <div className={styles.tasksList}>
-          {tasks.map(({ title, isFinished }) => (
+      <div className={styles.tasksList}>
+        {tasks.map(({ id, title, isFinished }) => (
+          <div
+            key={id}
+            className={styles.taskswrap}
+          >
             <div
-              key={title}
               className={styles.taskWrapper}
             >
               <input
                 type="checkbox"
-                id={`${title}-checkbox`}
+                id={`${id}-checkbox`}
                 checked={isFinished}
-                onChange={() => toggleTask(title)}
+                onChange={() => toggleTask(id)}
               />
-            <label
-              htmlFor={`${title}-checkbox`}
-              className={clsx(styles.task, {
-                [styles.finishedTask]: isFinished,
-              })}
-            >{title}</label>
+              <label
+                htmlFor={`${id}-checkbox`}
+                className={clsx(styles.task, {
+                  [styles.finishedTask]: isFinished,
+                })}
+              >{title}</label>
             </div>
-          ))}
-        </div>
+            {isFinished && (
+              <div>
+                <button
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                  type="button"
+                  onClick={() => deleteTask(id)}
+                >
+                  x
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
       <div className={styles.footer}>
-        <div className={styles.addTask}>
-          <input
-            className={styles.input}
-            type="text"
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
-          />
+        <form
+          className={styles.addTask}
+          action=""
+          onSubmit={(event) => {
+            event.preventDefault();
+            handleAddTask();
+          }}
+        >
+          <div
+            className={styles.inputWrapper}
+          >
+            <input
+              id="taskInput"
+              name="taskName"
+              className={styles.input}
+              type="text"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+            />
+            {inputValue && (
+              <button
+                className={styles.inputButton}
+                type="button"
+                onClick={() => setInputValue("")}
+              >
+                x
+              </button>
+            )}
+          </div>
           <Button
             color={'cyan'}
-            onClick={handleAddTask}
+            onClick={() => console.log()}
           >
             Добавить
           </Button>
-        </div>
+        </form>
         <Button
           color={isActive ? 'cyan' : 'lime'}
           onClick={toggleTimer}
