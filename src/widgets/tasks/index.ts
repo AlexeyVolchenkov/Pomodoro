@@ -1,1 +1,1 @@
-export { default } from './ui/Tasks'
+export { default } from './ui/TasksList'

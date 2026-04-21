@@ -12,14 +12,24 @@ interface TimerStore {
   setIsActive: (value: boolean) => void;
   formatedTime: () => string;
   switchMode: (current: Mode, next: Mode) => void;
+  resetTimer: () => void;
+}
+
+const initialState = {
+  totalTime: 1500,
+  timer: 1000,
+  isActive: false,
+  currentMode: 'Фокус' as Mode,
+  nextMode: 'Перерыв' as Mode,
 }
 
 export const useTimerStore = create<TimerStore>((set, get) => ({
-  totalTime: 1500,
-  timer: 1500,
-  isActive: false,
-  currentMode: 'Фокус',
-  nextMode: 'Перерыв',
+  // totalTime: 1500,
+  // timer: 1500,
+  // isActive: false,
+  // currentMode: 'Фокус',
+  // nextMode: 'Перерыв',
+  ...initialState,
 
   setIsActive: (value) => set({ isActive: value }),
 
@@ -42,4 +52,5 @@ export const useTimerStore = create<TimerStore>((set, get) => ({
     }
     set({ currentMode: next, nextMode: current })
   },
+  resetTimer: () => set(initialState)
 }))

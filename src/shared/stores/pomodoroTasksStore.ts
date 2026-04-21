@@ -1,30 +1,24 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-interface Tasks {
+interface PomodoroTasks {
   id: number;
   title: string;
   isFinished: boolean;
-  group: string;
 }
 
 interface PomodoroTasksStore {
-  tasks: Tasks[];
-  groups: string[];
-  currentGroup: string;
+  tasks: PomodoroTasks[];
 
-  addTask: (title: string, group: string) => void;
+  addTask: (title: string) => void;
   deleteTask: (id: number) => void;
   toggleTask: (id: number) => void;
-  setCurrentGroup: (group: string) => void;
 }
 
-export const useTasksStore = create<PomodoroTasksStore>((set, get) => ({
+export const usePomodoroTasksStore = create<PomodoroTasksStore>((set, get) => ({
   tasks: [
   ],
-  groups: ['all', 'work', 'home'],
-  currentGroup: 'all',
 
-  addTask: (title, group) => {
+  addTask: (title) => {
     const { tasks } = get();
     let nextId = -1
     tasks.forEach((task) => {
@@ -34,7 +28,7 @@ export const useTasksStore = create<PomodoroTasksStore>((set, get) => ({
     })
     nextId = nextId + 1;
     set((state) => ({
-      tasks: [...state.tasks, {title, isFinished: false, id: nextId, group}]
+      tasks: [...state.tasks, {title, isFinished: false, id: nextId}]
     }))
   },
   deleteTask: (id) => set((state) => ({
@@ -42,6 +36,5 @@ export const useTasksStore = create<PomodoroTasksStore>((set, get) => ({
   })),
   toggleTask: (id) => set((state) => ({
     tasks: state.tasks.map((task) => task.id !== id ? task : {...task, isFinished: !task.isFinished})
-  })),
-  setCurrentGroup: (group) => set({currentGroup: group}),
+  }))
 }))

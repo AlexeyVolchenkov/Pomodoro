@@ -1,7 +1,7 @@
 import styles from "./Main.module.scss";
 import Timer from "@widgets/timer";
 import MainCard from "@features/MainCard";
-import Tasks from "@widgets/tasks";
+import PomodoroTasks from "@widgets/pomodoroTasks";
 
 const Main = () => {
   return (
@@ -19,7 +19,7 @@ const Main = () => {
           title="Список задач"
           subTitle="Ваши задачи на текущую сессию"
         >
-          <Tasks />
+          <PomodoroTasks />
         </MainCard>
       </div>
     </>

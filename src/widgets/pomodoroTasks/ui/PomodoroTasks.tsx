@@ -1,19 +1,20 @@
 import {useState} from "react";
 import {useTimerStore} from "@shared/stores/timerStore.ts";
-import {useTasksStore} from "@shared/stores/tasksStore.ts";
+import {usePomodoroTasksStore} from "@shared/stores/pomodoroTasksStore.ts";
 import clsx from 'clsx'
 import Button from "@shared/Button";
-import styles from './Tasks.module.scss'
+import styles from './PomodoroTasks.module.scss'
+import Input from "@shared/Input";
 
-const Tasks = () => {
+const PomodoroTasks = () => {
   const [inputValue, setInputValue] = useState<string>("");
 
   const isActive = useTimerStore((state) => state.isActive);
   const setIsActive = useTimerStore((state) => state.setIsActive);
-  const tasks = useTasksStore((state) => state.tasks);
-  const addTask = useTasksStore((state) => state.addTask);
-  const toggleTask = useTasksStore((state) => state.toggleTask);
-  const deleteTask = useTasksStore((state) => state.deleteTask);
+  const tasks = usePomodoroTasksStore((state) => state.tasks);
+  const addTask = usePomodoroTasksStore((state) => state.addTask);
+  const toggleTask = usePomodoroTasksStore((state) => state.toggleTask);
+  const deleteTask = usePomodoroTasksStore((state) => state.deleteTask);
 
   const toggleTimer = () => setIsActive(!isActive);
 
@@ -73,27 +74,10 @@ const Tasks = () => {
             handleAddTask();
           }}
         >
-          <div
-            className={styles.inputWrapper}
-          >
-            <input
-              id="taskInput"
-              name="taskName"
-              className={styles.input}
-              type="text"
-              value={inputValue}
-              onChange={(event) => setInputValue(event.target.value)}
-            />
-            {inputValue && (
-              <button
-                className={styles.inputButton}
-                type="button"
-                onClick={() => setInputValue("")}
-              >
-                x
-              </button>
-            )}
-          </div>
+          <Input
+            placeholder="Добавить задачу"
+            inputValue={inputValue}
+            setInputValue={setInputValue} />
           <Button
             color={'cyan'}
             onClick={() => console.log()}
@@ -111,4 +95,4 @@ const Tasks = () => {
     </div>
   )
 }
-export default Tasks
+export default PomodoroTasks

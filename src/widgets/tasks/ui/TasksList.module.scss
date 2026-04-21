@@ -1,0 +1,88 @@
+@use "@styles/variables";
+
+.wrapper {
+  display: flex;
+  column-gap: 10px;
+}
+
+.groupWrapper {
+  display: grid;
+  row-gap: 5px;
+}
+
+.activeGroup {
+  background-color: green;
+}
+
+.taskListWrapper {
+  display: grid;
+  row-gap: 10px;
+  flex: 1;
+}
+
+.addTaskContainer {
+  display: flex;
+  column-gap: 10px;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-zinc-100);
+
+  & input[type="checkbox"] {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    clip-path: inset(100%) !important;
+    clip: rect(0 0 0 0) !important;
+    overflow: hidden !important;
+  }
+
+  & input[type="checkbox"]:checked + .task:after {
+    opacity: 1;
+  }
+}
+
+.task {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 0;
+    translate: 0 -50%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-zinc-100);
+    border: 1px solid var(--color-zinc-200);
+    border-radius: var(--border-radius-xxs);
+    transition-duration: var(--transition-duration);
+  }
+
+  &:hover:before {
+    border-color: var(--color-cyan-500);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 1px;
+    width: 7px;
+    height: 15px;
+    border: solid var(--color-lime-500);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition-duration: var(--transition-duration);
+  }
+}
